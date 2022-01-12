@@ -47,7 +47,7 @@ class LoginPageTest(BaseTest.BaseTest):
 
         # verify that error message appears
         time.sleep(2)
-        error_message = self.driver.find_element_by_css_selector("div.message.error")
+        error_message = self.driver.find_element_by_xpath("//div[@class='message error']")
         assert error_message.text == "You shall not pass! Arr!"
 
     def testEmailValidationIsWorking(self):
