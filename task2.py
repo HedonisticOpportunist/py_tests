@@ -1,5 +1,5 @@
-
 import BaseTest
+import time 
 
 # !!! Do not create your own WebDriver. !!!
 #
@@ -26,9 +26,10 @@ class LoginPageTest(BaseTest.BaseTest):
         # login 
         email_input.send_keys("login@codility.com")
         password_input.send_keys("password")
-        login_button.send_keys("")
+        login_button.click()
 
         # verify that welcome message is present
+        time.sleep(2) 
         welcome_message = self.driver.find_element_by_xpath("//div[@class='message success']")
         assert welcome_message.text == "Welcome to Codility"
 
@@ -42,11 +43,12 @@ class LoginPageTest(BaseTest.BaseTest):
         # invalid login 
         email_input.send_keys("unknown@codility.com")
         password_input.send_keys("password")
-        login_button.send_keys("")
+        login_button.click()
 
         # verify that error message appears
+        time.sleep(2)
         error_message = self.driver.find_element_by_css_selector("div.message.error")
-        assert error.message.text == "You shall not pass! Arr!"
+        assert error_message.text == "You shall not pass! Arr!"
 
     def testEmailValidationIsWorking(self):
 
@@ -58,9 +60,10 @@ class LoginPageTest(BaseTest.BaseTest):
          # invalid email 
         email_input.send_keys("unknown.codility.com")
         password_input.send_keys("password")
-        login_button.send_keys("")
+        login_button.click()
 
         # verify that validation error is present
+        time.sleep(2)
         email_validation = self.driver.find_element_by_xpath("//div[@class='validation error']")
         assert email_validation.text == "Enter a valid email"
 
@@ -71,12 +74,11 @@ class LoginPageTest(BaseTest.BaseTest):
         password_input = self.driver.find_element_by_id("password-input")
         login_button = self.driver.find_element_by_id("login-button")
 
-         # invalid email 
+        # invalid email 
         email_input.send_keys("")
         login_button.send_keys("")
 
          # verify that validation error is present
-        empyt_field_validation = self.driver.find_element_by_xpath("//div[@class='validation error']")
-        assert email_validation.text == "Email is required"
-
-
+        time.sleep(2)
+        empty_field_validation = self.driver.find_element_by_xpath("//div[@class='validation error']")
+        assert empty_field_validation.text == "Email is required"
